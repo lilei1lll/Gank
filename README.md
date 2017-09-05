@@ -1,1 +1,6 @@
 # Gank
+
+### work for duplicate code
+*  ?????
+ * ??baseModel?basePresenter?interface
+ 

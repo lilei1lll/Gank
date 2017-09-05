@@ -27,7 +27,7 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
 
     private RecyclerView mAndroidRecyclerView;
     private TechnologyAdapter mAndroidAdapter;
-    private LinearLayoutManager mLinearLayoutManager;
+    private LinearLayoutManager mLinearLayoutManager = null;
     private ArrayList<FirstLevelInterfaceItem> mAndroidArrayList;
 
     @Override
@@ -35,6 +35,7 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
         View mAndroidFragment = inflater.inflate(R.layout.fragment_android, null);
 
         initView(mAndroidFragment);
+        mAndroidPresenter.initPage();
         return mAndroidFragment;
     }
 
@@ -67,16 +68,25 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
 
     }
 
+    /**
+     * 由java分配内存机制可知 mAndroidArrayList 和 mAndroidAdapter中的ArrayList<FirstLevelInterfaceItem>是一致的
+     * @param items ArrayList<FirstLevelInterfaceItem>
+     */
     @Override
-    public void addDataToRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items) {
-
+    public void changeDataRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items) {
+        mAndroidArrayList = items;
+        mAndroidAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * LinearLayoutManager 在第一次启动时才会初始化，未初始化时默认为null
+     * @return
+     */
     @Override
-    public void replaceDataRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items) {
-
+    public boolean isFirstStart() {
+        if (mLinearLayoutManager == null) return true;
+        return false;
     }
-
 
     @Override
     public void OnItemClicked(String aim) {

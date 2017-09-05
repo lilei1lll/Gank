@@ -10,6 +10,6 @@ import java.util.ArrayList;
 
 public interface IBaseRecyclerView {
     void startRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items);
-    void addDataToRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items);
-    void replaceDataRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items);
+    void changeDataRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items);
+    boolean isFirstStart();
 }

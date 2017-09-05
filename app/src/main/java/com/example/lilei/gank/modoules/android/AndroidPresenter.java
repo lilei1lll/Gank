@@ -36,6 +36,5 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
 
     @Override
     public void refreshPage() {
-
     }
 }
