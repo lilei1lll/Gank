@@ -1,5 +1,7 @@
 package com.example.lilei.gank.modoules.android;
 
+import android.util.Log;
+
 import com.example.lilei.gank.GankApplication;
 import com.example.lilei.gank.R;
 import com.example.lilei.gank.base.IBaseRecyclerModel;
@@ -25,7 +27,7 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
     private IAndroidView iAndroidView;
     private IBaseRecyclerModel iAndroidModel;
 
-    private int page = 1; //默认为第一页
+//    private int page = 1; //默认为第一页
 
     public AndroidPresenter(IAndroidView iAndroidView){
         this.iAndroidView = iAndroidView;
@@ -34,9 +36,9 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
 
     @Override
     public void initPage() {
-        technologyArrayList = iAndroidModel.getDataFromLocal(GankApplication.cacheDir + "/"+"android"); //默认只缓存第一页
-        iAndroidView.startRecyclerAdapter(technologyArrayList);
-
+//        technologyArrayList = iAndroidModel.getDataFromLocal(GankApplication.cacheDir + "/"+"android"); //默认只缓存第一页
+//        iAndroidView.startRecyclerAdapter(technologyArrayList);
+        loadDataFromModel(1);
     }
 
     @Override
@@ -52,8 +54,9 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
                 public void onNext(ArrayList<FirstLevelInterfaceItem> value) {
                     // TODO 判断是不是第一页
                     technologyArrayList = value;
+                    Log.d("TAG", "onNext: "+value+"\n"+value.get(0).get_id());
                     if (iAndroidView.isFirstStartRec()){
-                        iAndroidModel.writeDataToLocal(GankApplication.cacheDir + "/"+"android", value);
+//                        iAndroidModel.writeDataToLocal(GankApplication.cacheDir + "/"+"android", value);
                         iAndroidView.startRecyclerAdapter(technologyArrayList);
                     } else {
                         iAndroidView.changeDataRecyclerAdapter(technologyArrayList);

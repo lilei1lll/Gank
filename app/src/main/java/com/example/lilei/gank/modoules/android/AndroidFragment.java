@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,8 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
     private IBaseRecyclerPresenter mAndroidPresenter; // 容器
 
     private RecyclerView mAndroidRecyclerView;
-    private TechnologyAdapter mAndroidAdapter;
-    private LinearLayoutManager mLinearLayoutManager = null;
+    private TechnologyAdapter mAndroidAdapter = null;
+    private LinearLayoutManager mLinearLayoutManager;
     private ArrayList<FirstLevelInterfaceItem> mAndroidArrayList;
 
     @Override
@@ -35,6 +36,8 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
         View mAndroidFragment = inflater.inflate(R.layout.fragment_android, null);
 
         initView(mAndroidFragment);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mAndroidRecyclerView.setLayoutManager(mLinearLayoutManager);
         mAndroidPresenter.initPage();
         return mAndroidFragment;
     }
@@ -48,8 +51,8 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
 
     @Override
     public void startRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items) {
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mAndroidRecyclerView.setLayoutManager(mLinearLayoutManager);
+        Log.d("TAG", "startRecyclerAdapter: "+items+"\n"+items.get(0).get_id());
+        mAndroidArrayList = items;
         mAndroidAdapter = new TechnologyAdapter(mAndroidArrayList, getContext());
         mAndroidAdapter.setOnTechnologyClickListener(this);
         mAndroidRecyclerView.setAdapter(mAndroidAdapter);
@@ -79,12 +82,12 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
     }
 
     /**
-     * LinearLayoutManager 在第一次启动时才会初始化，未初始化时默认为null
+     * mAndroidAdapter 在第一次启动时才会初始化，未初始化时默认为null
      * @return
      */
     @Override
     public boolean isFirstStartRec() {
-        if (mLinearLayoutManager == null) return true;
+        if (mAndroidAdapter == null) return true;
         return false;
     }
 

@@ -45,7 +45,7 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
             FirstLevelInterfaceItem technologyItem = technologyArrayList.get(position);
             if (technologyItem.getImages() != null){
                 Glide.with(mContext)
-                        .load(technologyItem.getImages())
+                        .load(technologyItem.getImages().get(0))
                         .error(R.mipmap.error_default)
                         .into(holder.imageView);
             }

@@ -1,6 +1,8 @@
 package com.example.lilei.gank.component.network;
 
 
+import android.util.Log;
+
 import com.example.lilei.gank.entity.Result;
 
 import io.reactivex.Observable;
@@ -38,7 +40,8 @@ public class RxUtils {
 
     public static <T> ObservableTransformer<Result<T>, T> handleResult() {
         return upstream -> upstream.flatMap(tResult -> {
-            if (tResult.error) {
+            Log.d("TAG", "handleResult: "+tResult.error+"  "+tResult.data);
+            if (!tResult.error) {
                 return createData(tResult.data);
             } else {
                 return Observable.error(new ApiException(0, "请重试"));
