@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.lilei.gank.R;
 import com.example.lilei.gank.entity.FirstLevelInterfaceItem;
-import com.example.lilei.gank.modoules.OnMyItemClickListener;
+import com.example.lilei.gank.modoules.OnMyClickListener;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
 
     ArrayList<FirstLevelInterfaceItem> technologyArrayList;
     Context mContext;
-    OnMyItemClickListener onMyItemClickListener;
+    OnMyClickListener onMyClickListener;
 
     public TechnologyAdapter(ArrayList<FirstLevelInterfaceItem> TechnologyArrayList, Context mContext){
         this.technologyArrayList = TechnologyArrayList;
@@ -72,10 +72,15 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
             tvAuthor = (TextView)itemView.findViewById(R.id.technology_author);
             tvTime = (TextView)itemView.findViewById(R.id.technology_time);
 
-            if (onMyItemClickListener != null){
+            if (onMyClickListener != null){
                 itemView.setOnClickListener(l ->
-                        onMyItemClickListener.OnItemClicked(technologyArrayList.get(getLayoutPosition()).getUrl()));
+                        onMyClickListener.OnItemClicked(technologyArrayList.get(getLayoutPosition()).getUrl()));
             }
         }
+    }
+
+
+    public void setOnTechnologyClickListener(OnMyClickListener listener){
+        this.onMyClickListener = listener;
     }
 }
