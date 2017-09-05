@@ -10,7 +10,7 @@ import io.reactivex.Observer;
  * Created by lilei on 2017/9/4.
  */
 
-public interface IBaseModel {
+public interface IBaseRecyclerModel {
 
     void getDataFromWeb(int page, Observer<ArrayList<FirstLevelInterfaceItem>> observer);
     ArrayList<FirstLevelInterfaceItem> getDataFromLocal(String key);
