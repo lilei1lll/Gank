@@ -11,5 +11,5 @@ import java.util.ArrayList;
 public interface IBaseRecyclerView {
     void startRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items);
     void changeDataRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items);
-    boolean isFirstStart();
+    boolean isFirstStartRec();
 }

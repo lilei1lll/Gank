@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 /**
  * Created by lilei on 2017/9/5.
+ *
+ * 空指针检错的集中处理 onBindViewHolder中处理
  */
 
 public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.ViewHolder> {
@@ -39,18 +41,21 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        FirstLevelInterfaceItem technologyItem = technologyArrayList.get(position);
-        if (technologyItem.getImages() != null){
-            Glide.with(mContext)
-                    .load(technologyItem.getImages())
-                    .error(R.mipmap.error_default)
-                    .into(holder.imageView);
+        if (technologyArrayList != null){
+            FirstLevelInterfaceItem technologyItem = technologyArrayList.get(position);
+            if (technologyItem.getImages() != null){
+                Glide.with(mContext)
+                        .load(technologyItem.getImages())
+                        .error(R.mipmap.error_default)
+                        .into(holder.imageView);
+            }
+            holder.tvDesc.setText(technologyItem.getDesc());
+            if (technologyItem.getWho() != null){
+                holder.tvAuthor.setText(technologyItem.getWho());
+            }
+            holder.tvTime.setText(technologyItem.getPublishedAt());
         }
-        holder.tvDesc.setText(technologyItem.getDesc());
-        if (technologyItem.getWho() != null){
-            holder.tvAuthor.setText(technologyItem.getWho());
-        }
-        holder.tvTime.setText(technologyItem.getPublishedAt());
+
     }
 
     @Override

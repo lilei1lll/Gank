@@ -83,11 +83,12 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
      * @return
      */
     @Override
-    public boolean isFirstStart() {
+    public boolean isFirstStartRec() {
         if (mLinearLayoutManager == null) return true;
         return false;
     }
 
+    // TODO add intent
     @Override
     public void OnItemClicked(String aim) {
 
