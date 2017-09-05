@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Gank</string>
+    <string name="no_network">网络不给力</string>
+    <string name="fail_connet">连接服务器失败，请稍后再试！</string>
+
+    <!--主菜单-->
+    <string name="android">android</string>
+    <string name="ios">IOS</string>
+    <string name="frontEnd">前端</string>
+    <string name="welfare">福利</string>
+    <!--android-->
+
+    <!--ios-->
+
+    <!--front-end-->
+
+    <!--welfare-->
 </resources>

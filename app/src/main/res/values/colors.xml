@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--其他-->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--主菜单-->
+    <color name="main_toolbar">#00caab</color>
+    <color name="unselected">#8a8a8a</color>
+    <color name="selected">#00caab</color>
+    <color name="defaultWhite">#ffffff</color>
+
+    <!--android-->
+
+    <!--ios-->
+
+    <!--front-end-->
+
+    <!--welfare-->
+
 </resources>

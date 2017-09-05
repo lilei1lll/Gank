@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="#fff">
+
+        <ImageView
+            android:id="@+id/technology_imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/error_default"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:id="@+id/technology_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="前端每周清单第 27 期：React Patent License 回复，Shopify WebVR 购物，原生 JS MVC 设计，Flow 优化 React 支持"/>
+
+            <TextView
+                android:id="@+id/technology_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="王下邀月熊"/>
+
+            <TextView
+                android:id="@+id/technology_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/first_level_interface_tag"
+                android:text=" 2017-08-23T12:12:15.166Z "/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

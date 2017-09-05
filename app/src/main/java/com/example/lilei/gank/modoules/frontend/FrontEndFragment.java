@@ -1,4 +1,4 @@
-package com.example.lilei.gank.modoules.frontEnd;
+package com.example.lilei.gank.modoules.frontend;
 
 
 import com.example.lilei.gank.base.BaseFragment;

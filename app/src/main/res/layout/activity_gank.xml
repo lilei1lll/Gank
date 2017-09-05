@@ -1,18 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lilei.gank.GankActivity">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.lilei.gank.modoules.main.GankActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/gank_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/main_toolbar">
+        <TextView
+            android:textColor="@color/defaultWhite"
+            android:id="@+id/gank_toolbar_title"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </android.support.v7.widget.Toolbar>
+
+    <!--fragment容器-->
+    <LinearLayout
+        android:id="@+id/gank_fragment"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/gank_android_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@mipmap/android_unselected"/>
+            <TextView
+                android:id="@+id/gank_android_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/unselected"
+                android:text="@string/android"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/gank_ios_ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@mipmap/ios_unselected"/>
+            <TextView
+                android:id="@+id/gank_ios_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/unselected"
+                android:text="@string/ios"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/gank_frontEnd_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@mipmap/frontend_unselected"/>
+            <TextView
+                android:id="@+id/gank_frontEnd_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/unselected"
+                android:text="@string/frontEnd"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/gank_welfare_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@mipmap/welfare_unselected"/>
+            <TextView
+                android:id="@+id/gank_welfare_textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/unselected"
+                android:text="@string/welfare"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
