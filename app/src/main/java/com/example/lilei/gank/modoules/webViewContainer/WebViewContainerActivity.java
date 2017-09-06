@@ -48,6 +48,7 @@ public class WebViewContainerActivity extends BaseSwipeBackActivity implements V
         mWebView = new WebView(getApplicationContext());
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new WebViewClient());
+        mWebView.getSettings().setAllowContentAccess(true);
         mWebView.loadUrl(mUrl);
         mLinearLayout.addView(mWebView);
         setProgressbar(mWebView);
