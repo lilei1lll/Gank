@@ -43,7 +43,7 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
 
     @Override
     public void loadDataFromModel(int page) {
-        if (CommonUtil.isNetworkConnected(GankApplication.getContext()) && CommonUtil.isWifi(GankApplication.getContext())) {
+        if (CommonUtil.isNetworkConnected(GankApplication.getContext()) || CommonUtil.isWifi(GankApplication.getContext())) {
             iAndroidModel.getDataFromWeb(page, new Observer<ArrayList<FirstLevelInterfaceItem>>() {
                 @Override
                 public void onSubscribe(Disposable d) {
@@ -55,7 +55,7 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
                     // TODO 判断是不是第一页
                     technologyArrayList = value;
                     Log.d("TAG", "onNext: "+value+"\n"+value.get(0).get_id());
-                    if (iAndroidView.isFirstStartRec()){
+                    if (iAndroidView.isStartedRec()){
 //                        iAndroidModel.writeDataToLocal(GankApplication.cacheDir + "/"+"android", value);
                         iAndroidView.startRecyclerAdapter(technologyArrayList);
                     } else {

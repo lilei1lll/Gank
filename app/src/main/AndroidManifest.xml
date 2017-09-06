@@ -21,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".modoules.webViewContainer.WebViewContainerActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
 package com.example.lilei.gank.base;
 
+import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
@@ -19,6 +21,76 @@ public class BaseActivity extends AppCompatActivity {
             tintManager.setStatusBarTintResource(color);
             tintManager.setStatusBarTintEnabled(true);
         }
+    }
+
+
+
+    public void startIntentActivity(BaseActivity activity1,BaseActivity activity2){
+        Intent intent = new Intent();
+        intent.setClass(activity1, activity2.getClass());
+        startActivity(intent);
+    }
+
+    public void startIntentActivity(BaseActivity activity1,BaseActivity activity2, String name, String value){
+        Intent intent = new Intent();
+        intent.putExtra(name, value);
+        intent.setClass(activity1, activity2.getClass());
+        startActivity(intent);
+    }
+    public void startIntentActivity(BaseActivity activity1,BaseActivity activity2, String name, int value){
+        Intent intent = new Intent();
+        intent.putExtra(name, value);
+        intent.setClass(activity1, activity2.getClass());
+        startActivity(intent);
+    }
+    public void startIntentActivity(BaseActivity activity1,BaseActivity activity2, String name1, int value1,String name2, int value2){
+        Intent intent = new Intent();
+        intent.putExtra(name1, value1);
+        intent.putExtra(name2, value2);
+        intent.setClass(activity1, activity2.getClass());
+        startActivity(intent);
+    }
+    public void startIntentActivity(BaseActivity activity1,BaseActivity activity2, String name1, String value1,String name2, int value2){
+        Intent intent = new Intent();
+        intent.putExtra(name1, value1);
+        intent.putExtra(name2, value2+"");
+        intent.setClass(activity1, activity2.getClass());
+        startActivity(intent);
+    }
+    public void startIntentActivity(BaseActivity activity1,BaseActivity activity2,
+                                    String name1, String value1,String name2, int value2
+            ,String name3,int value3){
+        Intent intent = new Intent();
+        intent.putExtra(name1, value1);
+        intent.putExtra(name2, value2);
+        intent.putExtra(name3, value3);
+        intent.setClass(activity1, activity2.getClass());
+        startActivity(intent);
+    }
+
+
+    public void startIntentActivity(BaseActivity activity1,BaseActivity activity2,
+                                    String name1, String value1,String name2, int value2
+            ,String name3,String value3){
+        Intent intent = new Intent();
+        intent.putExtra(name1, value1);
+        intent.putExtra(name2, ""+value2);
+        intent.putExtra(name3, value3);
+        intent.setClass(activity1, activity2.getClass());
+        startActivity(intent);
+    }
+
+    public void startIntentActivity(BaseActivity activity1,Fragment fragment2){
+        Intent intent = new Intent();
+        intent.setClass(activity1, fragment2.getClass());
+        startActivity(intent);
+    }
+
+    public void startIntentActivity(BaseActivity activity1,Fragment fragment2, String name, String value){
+        Intent intent = new Intent();
+        intent.putExtra(name, value);
+        intent.setClass(activity1, fragment2.getClass());
+        startActivity(intent);
     }
 
 }

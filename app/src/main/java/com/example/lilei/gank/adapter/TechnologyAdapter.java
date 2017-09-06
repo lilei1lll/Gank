@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.lilei.gank.R;
+import com.example.lilei.gank.component.util.CommonUtil;
 import com.example.lilei.gank.entity.FirstLevelInterfaceItem;
 import com.example.lilei.gank.modoules.OnMyClickListener;
 
@@ -43,17 +44,26 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (technologyArrayList != null){
             FirstLevelInterfaceItem technologyItem = technologyArrayList.get(position);
+            holder.imageView.setVisibility(View.VISIBLE);
             if (technologyItem.getImages() != null){
+                // 第一次优化：两个视频35M -> 加载策略
+                // 第二次优化：三个视频 10M
                 Glide.with(mContext)
                         .load(technologyItem.getImages().get(0))
+//                        .override(100, 100)
+//                        .thumbnail( 0.1F )
+                        .asGif()
+                        .placeholder(R.mipmap.error_default)
                         .error(R.mipmap.error_default)
                         .into(holder.imageView);
+            } else {
+                holder.imageView.setVisibility(View.GONE);
             }
             holder.tvDesc.setText(technologyItem.getDesc());
             if (technologyItem.getWho() != null){
                 holder.tvAuthor.setText(technologyItem.getWho());
             }
-            holder.tvTime.setText(technologyItem.getPublishedAt());
+            holder.tvTime.setText(CommonUtil.safeAddText(technologyItem.getPublishedAt()));
         }
 
     }
@@ -79,7 +89,9 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
 
             if (onMyClickListener != null){
                 itemView.setOnClickListener(l ->
-                        onMyClickListener.OnItemClicked(technologyArrayList.get(getLayoutPosition()).getUrl()));
+                        onMyClickListener.OnItemClicked(
+                                technologyArrayList.get(getLayoutPosition()).getUrl(),
+                                technologyArrayList.get(getLayoutPosition()).getDesc()));
             }
         }
     }

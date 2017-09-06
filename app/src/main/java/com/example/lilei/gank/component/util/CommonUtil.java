@@ -131,7 +131,10 @@ public class CommonUtil {
         return safeText(msg + "");
     }
 
-
+    public static String safeAddText(String msg){
+        if (TextUtils.isEmpty(msg)) return "";
+        return " " + msg + " ";
+    }
     /**
      * 控制小数点后两位
      *

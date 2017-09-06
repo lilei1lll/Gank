@@ -15,6 +15,7 @@ import com.example.lilei.gank.base.BaseFragment;
 import com.example.lilei.gank.base.IBaseRecyclerPresenter;
 import com.example.lilei.gank.entity.FirstLevelInterfaceItem;
 import com.example.lilei.gank.modoules.OnMyClickListener;
+import com.example.lilei.gank.modoules.webViewContainer.WebViewContainerActivity;
 
 import java.util.ArrayList;
 
@@ -86,14 +87,14 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
      * @return
      */
     @Override
-    public boolean isFirstStartRec() {
+    public boolean isStartedRec() {
         if (mAndroidAdapter == null) return true;
         return false;
     }
 
-    // TODO add intent
-    @Override
-    public void OnItemClicked(String aim) {
 
+    @Override
+    public void OnItemClicked(String aim, String cont) {
+        startIntentActivity(this, new WebViewContainerActivity(), "webViewUrl", aim, "webViewTitle", cont);
     }
 }

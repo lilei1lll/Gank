@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/webView_container_linearLayout">
+
+    <include layout="@layout/toolbar_webview_container"/>
+
+    <!--webview动态生成-->
+    <!--<WebView-->
+        <!--android:id="@+id/webView_container_webview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+</LinearLayout>
