@@ -38,7 +38,7 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
 
         ImageView imageView = (ImageView) view.findViewById(R.id.welfare_item_imageView);
         //给imageview的高度设置动态高度,实现瀑布流,也可以用其它方法去动态的设置它的高度
-        imageView.getLayoutParams().height = (int) (new Random().nextInt(150) + 450);
+        imageView.getLayoutParams().height = (int) (new Random().nextInt(150) + 480);
 
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;

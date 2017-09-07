@@ -75,6 +75,6 @@ public class WelfareFragment extends BaseFragment implements IWelfareView, OnMyC
 
     @Override
     public void OnItemClicked(String aim, String cont) {
-        ToastUtil.show("这个小姐姐照片不可以放大");
+        ToastUtil.show("明确告诉你，点击后的效果还没做！");
     }
 }

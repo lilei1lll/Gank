@@ -9,7 +9,7 @@ import com.example.lilei.gank.C;
 import com.example.lilei.gank.R;
 import com.example.lilei.gank.base.BaseActivity;
 import com.example.lilei.gank.modoules.android.AndroidFragment;
-import com.example.lilei.gank.modoules.frontend.FrontEndFragment;
+import com.example.lilei.gank.modoules.frontend.FrontendFragment;
 import com.example.lilei.gank.modoules.ios.IosFragment;
 import com.example.lilei.gank.modoules.welfare.WelfareFragment;
 
@@ -33,7 +33,7 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
 
     private AndroidFragment mAndroidFragment;
     private IosFragment mIosFragment;
-    private FrontEndFragment mFrontEndFragment;
+    private FrontendFragment mFrontendFragment;
     private WelfareFragment mWelfareFragment;
 
     @Override
@@ -142,8 +142,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
                     ivFrontend.setImageResource(R.mipmap.frontend_selected);
                     tvFrontend.setTextColor(getResources().getColor(R.color.selected));
                     SELECTED_FLAG = C.FRONTEND;
-                    mFrontEndFragment = new FrontEndFragment();
-                    transaction.replace(R.id.gank_fragment, mFrontEndFragment);
+                    mFrontendFragment = new FrontendFragment();
+                    transaction.replace(R.id.gank_fragment, mFrontendFragment);
                     tvTitle.setText("前端");
                     break;
                 case C.WELFARE:
