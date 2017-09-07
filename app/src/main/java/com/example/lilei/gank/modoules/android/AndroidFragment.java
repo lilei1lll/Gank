@@ -35,7 +35,6 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mAndroidFragment = inflater.inflate(R.layout.fragment_android, null);
-
         initView(mAndroidFragment);
         initRecyclerView(mAndroidFragment);
         mAndroidPresenter.initPage();

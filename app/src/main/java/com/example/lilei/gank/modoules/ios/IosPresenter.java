@@ -1,4 +1,4 @@
-package com.example.lilei.gank.modoules.android;
+package com.example.lilei.gank.modoules.ios;
 
 import android.util.Log;
 
@@ -16,35 +16,26 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by lilei on 2017/9/5.
+ * Created by lilei on 2017/9/7.
  */
 
-public class AndroidPresenter implements IBaseRecyclerPresenter {
+public class IosPresenter implements IBaseRecyclerPresenter {
 
-    // 判断technologyArrayList是否为空交给RecyclerView的Adapter
-    private ArrayList<FirstLevelInterfaceItem> mAndroidArrayList;
+    private ArrayList<FirstLevelInterfaceItem> mIosArrayList;
 
-    private IAndroidView iAndroidView;
-    private IBaseRecyclerModel iAndroidModel;
+    private IIosView iIosView;
+    private IBaseRecyclerModel iIosModel;
 
-//    private int page = 1; //默认为第一页
-
-    public AndroidPresenter(IAndroidView iAndroidView){
-        this.iAndroidView = iAndroidView;
-        this.iAndroidModel = new AndroidModel();
-    }
 
     @Override
     public void initPage() {
-//        technologyArrayList = iAndroidModel.getDataFromLocal(GankApplication.cacheDir + "/"+"android"); //默认只缓存第一页
-//        iAndroidView.startRecyclerAdapter(technologyArrayList);
         loadDataFromModel(1);
     }
 
     @Override
     public void loadDataFromModel(int page) {
         if (CommonUtil.isNetworkConnected(GankApplication.getContext()) || CommonUtil.isWifi(GankApplication.getContext())) {
-            iAndroidModel.getDataFromWeb(page, new Observer<ArrayList<FirstLevelInterfaceItem>>() {
+            iIosModel.getDataFromWeb(page, new Observer<ArrayList<FirstLevelInterfaceItem>>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
@@ -53,13 +44,13 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
                 @Override
                 public void onNext(ArrayList<FirstLevelInterfaceItem> value) {
                     // TODO 判断是不是第一页
-                    mAndroidArrayList = value;
+                    mIosArrayList = value;
                     Log.d("TAG", "onNext: "+value+"\n"+value.get(0).get_id());
-                    if (iAndroidView.isStartedRec()){
+                    if (iIosView.isStartedRec()){
 //                        iAndroidModel.writeDataToLocal(GankApplication.cacheDir + "/"+"android", value);
-                        iAndroidView.startRecyclerAdapter(mAndroidArrayList);
+                        iIosView.startRecyclerAdapter(mIosArrayList);
                     } else {
-                        iAndroidView.changeDataRecyclerAdapter(mAndroidArrayList);
+                        iIosView.changeDataRecyclerAdapter(mIosArrayList);
                     }
                 }
 
@@ -78,7 +69,6 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
         }
     }
 
-    //TODO 刷新接口的实现方法(记得添加一个stopRefresh（）)
     @Override
     public void refreshPage() {
 
