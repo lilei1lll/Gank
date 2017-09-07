@@ -2,7 +2,7 @@ package com.example.lilei.gank.base;
 
 
 import com.github.moduth.blockcanary.BlockCanaryContext;
-import com.soully.xzds_campussay.BuildConfig;
+import com.github.moduth.blockcanary.android.BuildConfig;
 
 
 /**
