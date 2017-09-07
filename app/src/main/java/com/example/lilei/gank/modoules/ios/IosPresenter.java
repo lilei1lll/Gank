@@ -26,6 +26,10 @@ public class IosPresenter implements IBaseRecyclerPresenter {
     private IIosView iIosView;
     private IBaseRecyclerModel iIosModel;
 
+    public IosPresenter(IIosView iIosView){
+        this.iIosView = iIosView;
+        iIosModel = new IosModel();
+    }
 
     @Override
     public void initPage() {

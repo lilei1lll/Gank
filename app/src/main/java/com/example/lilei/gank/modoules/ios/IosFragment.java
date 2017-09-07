@@ -14,6 +14,7 @@ import com.example.lilei.gank.base.BaseFragment;
 import com.example.lilei.gank.base.IBaseRecyclerPresenter;
 import com.example.lilei.gank.entity.FirstLevelInterfaceItem;
 import com.example.lilei.gank.modoules.OnMyClickListener;
+import com.example.lilei.gank.modoules.webViewContainer.WebViewContainerActivity;
 
 import java.util.ArrayList;
 
@@ -42,11 +43,11 @@ public class IosFragment extends BaseFragment implements IIosView, OnMyClickList
     }
 
     private void initView(View v) {
-        mIosPresenter = new IosPresenter();
+        mIosPresenter = new IosPresenter(this);
     }
 
     private void initRecyclerView(View v) {
-        mIosRecyclerView = (RecyclerView) v.findViewById(R.id.android_recyclerView);
+        mIosRecyclerView = (RecyclerView) v.findViewById(R.id.ios_recyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mIosRecyclerView.setLayoutManager(mLinearLayoutManager);
     }
@@ -71,6 +72,7 @@ public class IosFragment extends BaseFragment implements IIosView, OnMyClickList
 
     @Override
     public void OnItemClicked(String aim, String cont) {
-
+        startIntentActivity(this, new WebViewContainerActivity(), "webViewUrl", aim, "webViewTitle", cont);
     }
+
 }
