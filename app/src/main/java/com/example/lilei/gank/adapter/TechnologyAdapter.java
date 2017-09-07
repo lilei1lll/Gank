@@ -60,9 +60,10 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
                 holder.imageView.setVisibility(View.GONE);
             }
             holder.tvDesc.setText(technologyItem.getDesc());
-            if (technologyItem.getWho() != null){
-                holder.tvAuthor.setText(technologyItem.getWho());
-            }
+//            if (technologyItem.getWho() != null){
+//                holder.tvAuthor.setText(technologyItem.getWho());
+//            }
+            holder.tvAuthor.setText(CommonUtil.safeText(technologyItem.getWho()));
             holder.tvTime.setText(CommonUtil.safeAddText(technologyItem.getPublishedAt()));
         }
 

@@ -37,8 +37,7 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
         View mAndroidFragment = inflater.inflate(R.layout.fragment_android, null);
 
         initView(mAndroidFragment);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mAndroidRecyclerView.setLayoutManager(mLinearLayoutManager);
+        initRecyclerView(mAndroidFragment);
         mAndroidPresenter.initPage();
         return mAndroidFragment;
     }
@@ -46,8 +45,12 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
 
     private void initView(View v){
         mAndroidPresenter = new AndroidPresenter(this);  // 注入执行类
+    }
 
+    private void initRecyclerView(View v){
         mAndroidRecyclerView = (RecyclerView) v.findViewById(R.id.android_recyclerView);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mAndroidRecyclerView.setLayoutManager(mLinearLayoutManager);
     }
 
     @Override
@@ -88,8 +91,7 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
      */
     @Override
     public boolean isStartedRec() {
-        if (mAndroidAdapter == null) return true;
-        return false;
+        return mAndroidAdapter == null;
     }
 
 
