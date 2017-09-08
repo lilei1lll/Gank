@@ -1,5 +1,8 @@
 # Gank
 
+### Architecture
+This application is based on MVP + rxjava +rxAndroid + retrofit + Glide +cardeview and other.
+
 ### work for cutting duplicate code
 *  make model impl extend basemodel and implement corresponding interface
 * use baseView interface and basePresenter interface
