@@ -56,7 +56,7 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
             Glide.with(mContext)
                     .load(welfareItem.getUrl())
 //                    .placeholder(R.mipmap.error_default)
-                    .error(R.mipmap.error_default)
+                    .error(R.drawable.error_default)
                     .into(holder.imageView);
              holder.tvAuthor.setText(CommonUtil.safeText(welfareItem.getWho()));
         }
