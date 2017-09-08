@@ -53,7 +53,7 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.Vi
 //                        .override(100, 100)
 //                        .thumbnail( 0.1F )
                         .asGif()
-                        .placeholder(R.mipmap.error_default)
+//                        .placeholder(R.mipmap.error_default)
                         .error(R.mipmap.error_default)
                         .into(holder.imageView);
             } else {
