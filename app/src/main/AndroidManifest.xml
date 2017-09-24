@@ -5,11 +5,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".GankApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -21,8 +23,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".modoules.webViewContainer.WebViewContainerActivity"
+        <activity android:name="com.avos.avoscloud.feedback.ThreadActivity" />
+        <activity android:name=".modoules.webViewContainer.TechnologyWebViewContainerActivity"
             android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.aboutUs.RightActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.account.AccountActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.collection.CollectionActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.message.MessageActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.modify.ModifyActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.setting.modules.feedback.FeedbackActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.setting.SettingActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.published.PublishedAndroid"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.published.PublishedIos"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.published.PublishedFrontend"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.user.modules.published.PublishedOther"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.login.AgreementActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+        <activity android:name=".modoules.login.LoginActivity"/>
+        <activity android:name=".modoules.login.RegisterActivity"
+            android:theme="@style/Gank.SwipeBack.Transparent.Theme"/>
+
     </application>
 
 </manifest>

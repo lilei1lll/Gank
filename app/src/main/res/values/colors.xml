@@ -19,4 +19,12 @@
 
     <!--welfare-->
 
+    <!--user-->
+    <color name="userWhite">#ffffff</color>
+    <color name="userChildLayoutText">#f0f0f0</color>
+    <color name="userChildLayoutToolbar">#00caab</color>
+    <color name="userEdition">#b3b3b3</color>
+    <color name="userChildTextBlack">#333333</color>
+    <color name="userChildTextBlue">#00caab</color>
+
 </resources>

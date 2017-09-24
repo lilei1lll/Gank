@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.lilei.gank.C;
 import com.example.lilei.gank.R;
 import com.example.lilei.gank.adapter.TechnologyAdapter;
 import com.example.lilei.gank.base.BaseFragment;
 import com.example.lilei.gank.base.IBaseRecyclerPresenter;
+import com.example.lilei.gank.component.OnStartWebViewListener;
 import com.example.lilei.gank.entity.FirstLevelInterfaceItem;
-import com.example.lilei.gank.modoules.OnMyClickListener;
-import com.example.lilei.gank.modoules.webViewContainer.WebViewContainerActivity;
+import com.example.lilei.gank.modoules.webViewContainer.TechnologyWebViewContainerActivity;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
  * Created by lilei on 2017/9/4.
  */
 
-public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyClickListener {
+public class AndroidFragment extends BaseFragment implements IAndroidView, OnStartWebViewListener {
 
     private IBaseRecyclerPresenter mAndroidPresenter; // 容器
 
@@ -32,12 +33,14 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
     private LinearLayoutManager mLinearLayoutManager;
     private ArrayList<FirstLevelInterfaceItem> mAndroidArrayList;
 
+    private int page = 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mAndroidFragment = inflater.inflate(R.layout.fragment_android, null);
         initView(mAndroidFragment);
         initRecyclerView(mAndroidFragment);
-        mAndroidPresenter.initPage();
+        mAndroidPresenter.initPage(page);
         return mAndroidFragment;
     }
 
@@ -59,16 +62,28 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
         mAndroidAdapter = new TechnologyAdapter(mAndroidArrayList, getContext());
         mAndroidAdapter.setOnTechnologyClickListener(this);
         mAndroidRecyclerView.setAdapter(mAndroidAdapter);
-        // TODO 下拉刷新
+        // 下拉刷新
         mAndroidRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int lastVisibleItem = -1;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (page <= C.MAX_PAGE){
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAndroidAdapter.getItemCount()){
+                        page = page + 1;
+                        mAndroidAdapter.changeMoreStatus(TechnologyAdapter.LOADING_MORE);
+                        mAndroidPresenter.loadDataFromWeb(page);
+                        mAndroidAdapter.changeMoreStatus(TechnologyAdapter.PULLUP_LOAD_MORE);
+                    }
+                }else {
+                    mAndroidAdapter.changeMoreStatus(TechnologyAdapter.NO_DATA_MORE);
+                }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
             }
         });
 
@@ -80,8 +95,9 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
      */
     @Override
     public void changeDataRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items) {
-        mAndroidArrayList = items;
+        mAndroidArrayList.addAll(items);
         mAndroidAdapter.notifyDataSetChanged();
+//        mAndroidAdapter.addList(items);
     }
 
     /**
@@ -95,7 +111,7 @@ public class AndroidFragment extends BaseFragment implements IAndroidView, OnMyC
 
 
     @Override
-    public void OnItemClicked(String aim, String cont) {
-        startIntentActivity(this, new WebViewContainerActivity(), "webViewUrl", aim, "webViewTitle", cont);
+    public void OnItemClicked(FirstLevelInterfaceItem item) {
+        startIntentActivity(this, new TechnologyWebViewContainerActivity(), "clickedBean", item);
     }
 }

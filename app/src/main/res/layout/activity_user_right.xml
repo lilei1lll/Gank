@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_simple"/>
+
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/logo"/>
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_marginTop="6dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/userEdition"
+        android:text="@string/edition"/>
+
+    <TextView
+        android:id="@+id/user_right_recommend"
+        android:clickable="true"
+        android:background="#fff"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        android:text="@string/recommendToFriend"
+        android:textColor="#333333"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        android:layout_height="50dp">
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eMail"/>
+
+        <TextView
+            android:id="@+id/user_right_email"
+            android:layout_marginLeft="13dp"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/eMailContext" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:text="@string/copyright"/>
+
+</LinearLayout>

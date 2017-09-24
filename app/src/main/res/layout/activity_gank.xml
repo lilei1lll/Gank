@@ -9,19 +9,7 @@
     tools:context="com.example.lilei.gank.modoules.main.GankActivity">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/gank_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/main_toolbar">
-        <TextView
-            android:textColor="@color/defaultWhite"
-            android:id="@+id/gank_toolbar_title"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-    </android.support.v7.widget.Toolbar>
+   <include layout="@layout/toolbar_main"/>
 
     <!--fragment容器-->
     <LinearLayout
@@ -115,6 +103,28 @@
                 android:textColor="@color/unselected"
                 android:text="@string/welfare"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/gank_user_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:src="@mipmap/user_unselected"/>
+
+            <TextView
+                android:id="@+id/gank_user_textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/unselected"
+                android:text="@string/user"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

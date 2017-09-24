@@ -110,7 +110,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         intent.putExtra(Intent.EXTRA_EMAIL, reciver);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, body);
-
     }
 
 }

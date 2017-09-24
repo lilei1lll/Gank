@@ -74,7 +74,7 @@ public class ACache {
         mCache = new ACacheManager(f, MAX_SIZE, MAX_COUNT);
     }
 
-       private static class SingletonHolder {
+    private static class SingletonHolder {
         public static final ACache sInstance = new ACache();
     }
 

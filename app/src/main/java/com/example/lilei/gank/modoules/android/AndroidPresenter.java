@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.lilei.gank.GankApplication;
 import com.example.lilei.gank.R;
-import com.example.lilei.gank.base.IBaseRecyclerModel;
+import com.example.lilei.gank.base.IBaseModel;
 import com.example.lilei.gank.base.IBaseRecyclerPresenter;
 import com.example.lilei.gank.component.util.CommonUtil;
 import com.example.lilei.gank.component.util.ToastUtil;
@@ -25,9 +25,7 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
     private ArrayList<FirstLevelInterfaceItem> mAndroidArrayList;
 
     private IAndroidView iAndroidView;
-    private IBaseRecyclerModel iAndroidModel;
-
-//    private int page = 1; //默认为第一页
+    private IBaseModel iAndroidModel;
 
     public AndroidPresenter(IAndroidView iAndroidView){
         this.iAndroidView = iAndroidView;
@@ -35,14 +33,14 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
     }
 
     @Override
-    public void initPage() {
-//        technologyArrayList = iAndroidModel.getDataFromLocal(GankApplication.cacheDir + "/"+"android"); //默认只缓存第一页
-//        iAndroidView.startRecyclerAdapter(technologyArrayList);
-        loadDataFromModel(1);
+    public void initPage(int page) {
+//        mAndroidArrayList = iAndroidModel.getDataFromLocal("android"+page); //默认只缓存第一页
+//        iAndroidView.startRecyclerAdapter(mAndroidArrayList);
+        loadDataFromWeb(page);
     }
 
     @Override
-    public void loadDataFromModel(int page) {
+    public void loadDataFromWeb(int page) {
         if (CommonUtil.isNetworkConnected(GankApplication.getContext()) || CommonUtil.isWifi(GankApplication.getContext())) {
             iAndroidModel.getDataFromWeb(page, new Observer<ArrayList<FirstLevelInterfaceItem>>() {
                 @Override
@@ -56,7 +54,7 @@ public class AndroidPresenter implements IBaseRecyclerPresenter {
                     mAndroidArrayList = value;
                     Log.d("TAG", "onNext: "+value+"\n"+value.get(0).get_id());
                     if (iAndroidView.isStartedRec()){
-//                        iAndroidModel.writeDataToLocal(GankApplication.cacheDir + "/"+"android", value);
+//                        iAndroidModel.writeDataToLocal("android"+page, value);
                         iAndroidView.startRecyclerAdapter(mAndroidArrayList);
                     } else {
                         iAndroidView.changeDataRecyclerAdapter(mAndroidArrayList);

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.example.lilei.gank.entity.FirstLevelInterfaceItem;
+
 /**
  * Created by lilei on 2017/9/4.
  */
@@ -11,6 +13,13 @@ import android.support.v4.app.Fragment;
 public class BaseFragment extends Fragment {
     public void startIntentActivity(Fragment fragment1,BaseActivity activity){
         Intent intent = new Intent();
+        intent.setClass(fragment1.getContext(),activity.getClass());
+        startActivity(intent);
+    }
+
+    public void startIntentActivity(Fragment fragment1, BaseActivity activity, String name, FirstLevelInterfaceItem value){
+        Intent intent = new Intent();
+        intent.putExtra(name, value);
         intent.setClass(fragment1.getContext(),activity.getClass());
         startActivity(intent);
     }

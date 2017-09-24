@@ -13,16 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
+import com.example.lilei.gank.C;
 import com.example.lilei.gank.R;
 import com.example.lilei.gank.base.BaseSwipeBackActivity;
 import com.example.lilei.gank.component.util.CommonUtil;
 import com.example.lilei.gank.component.util.ToastUtil;
+import com.example.lilei.gank.entity.FirstLevelInterfaceItem;
+import com.example.lilei.gank.modoules.login.LoginActivity;
 
 /**
  * Created by lilei on 2017/9/6.
  */
 
-public class WebViewContainerActivity extends BaseSwipeBackActivity implements View.OnClickListener{
+public class TechnologyWebViewContainerActivity extends BaseSwipeBackActivity implements ITechnologyView, View.OnClickListener{
 
     private ImageView ivBack;
     private TextView tvTitle;
@@ -34,15 +38,22 @@ public class WebViewContainerActivity extends BaseSwipeBackActivity implements V
     private String mTitleText;
     private String mUrl;
 
+    private FirstLevelInterfaceItem mClickedBean;
+    private ITechnologyPresenter iTechnologyPresenter;
+
+    private boolean isCollected = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview_container);
+        setContentView(R.layout.activity_technology_webview_container);
         Intent intent = getIntent();
-        mTitleText = intent.getStringExtra("webViewTitle");
-        mUrl = intent.getStringExtra("webViewUrl");
+        mClickedBean = (FirstLevelInterfaceItem)intent.getSerializableExtra("clickedBean");
+        mTitleText = mClickedBean.getDesc();
+        mUrl = mClickedBean.getUrl();
 
         initView();
+        iTechnologyPresenter.isCollection(mClickedBean.get_id());
 
         // 动态生成webView
         mWebView = new WebView(getApplicationContext());
@@ -55,6 +66,8 @@ public class WebViewContainerActivity extends BaseSwipeBackActivity implements V
     }
 
     private void initView() {
+        iTechnologyPresenter = new TechnologyPresenter(this);
+
         ivBack = (ImageView) findViewById(R.id.toolbar_webview_container_back);
         tvTitle = (TextView) findViewById(R.id.toolbar_webview_container_title);
         ivCollection = (ImageView) findViewById(R.id.toolbar_webview_container_collection);
@@ -74,11 +87,9 @@ public class WebViewContainerActivity extends BaseSwipeBackActivity implements V
                 super.onProgressChanged(view, newProgress);
                 if(newProgress==100){
                     mProgressBar.setVisibility(View.GONE);//加载完网页进度条消失
-                    Log.d("TAG", "onProgressChanged: 加载完网页");
                 } else {
                     mProgressBar.setVisibility(View.VISIBLE);   //开始加载网页时显示进度条
                     mProgressBar.setProgress(newProgress);      //设置进度值
-                    Log.d("TAG", "onProgressChanged: 加载中"+newProgress);
                 }
 
             }
@@ -105,8 +116,35 @@ public class WebViewContainerActivity extends BaseSwipeBackActivity implements V
                 finish();
                 break;
             case R.id.toolbar_webview_container_collection:
-                ToastUtil.show("收藏功能完善中...");
+                if (AVUser.getCurrentUser() == null){
+                    startIntentActivity(this, new LoginActivity());
+                } else if (!isCollected){
+                    iTechnologyPresenter.addCollection(mClickedBean);
+                } else {
+                    iTechnologyPresenter.removeCollection(mClickedBean.get_id());
+                }
                 break;
         }
     }
+
+
+    @Override
+    public void changeCollectionImage(int aimImage) {
+        switch (aimImage){
+            case C.COLLECTED:
+                ivCollection.setImageResource(R.mipmap.collection_selected);
+                isCollected = true;
+                Log.d("TAG", "changeCollectionImage: 1");
+                break;
+            case C.UNCOLLECTED:
+                ivCollection.setImageResource(R.mipmap.collection_unselected);
+                isCollected = false;
+                Log.d("TAG", "changeCollectionImage: 2");
+                break;
+            default:
+                ToastUtil.show(R.string.tryAgain);
+                break;
+        }
+    }
+
 }

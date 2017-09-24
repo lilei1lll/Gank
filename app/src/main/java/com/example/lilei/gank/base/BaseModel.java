@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by lilei on 2017/9/5.
  */
 
-public abstract class BaseRecyclerModel implements IBaseRecyclerModel {
+public abstract class BaseModel implements IBaseModel {
 
     @Override
     public ArrayList<FirstLevelInterfaceItem> getDataFromLocal(String key) {

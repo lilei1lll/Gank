@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_simple"/>
+
+    <TextView
+        android:id="@+id/user_collection_noCollection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/noCollection"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_big"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_collection_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+</LinearLayout>

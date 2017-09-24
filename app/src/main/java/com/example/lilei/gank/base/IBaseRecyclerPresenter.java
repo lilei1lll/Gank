@@ -5,7 +5,7 @@ package com.example.lilei.gank.base;
  */
 
 public interface IBaseRecyclerPresenter {
-    void initPage();
-    void loadDataFromModel(int page);
+    void initPage(int page);
+    void loadDataFromWeb(int page);
     void refreshPage();
 }

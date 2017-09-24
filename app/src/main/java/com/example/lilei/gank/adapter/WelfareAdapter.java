@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,11 +22,20 @@ import java.util.Random;
  * Created by lilei on 2017/9/7.
  */
 
-public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHolder> {
+public class WelfareAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private ArrayList<FirstLevelInterfaceItem> mWelfareArrayList;
     private OnMyClickListener myClickListener;
+    private static int Main_Item=1;
+    private int Last_Item_state = 100;
+    //上拉加载更多
+    public static final int PULLUP_LOAD_MORE = 100;
+    //正在加载中
+    public static final int LOADING_MORE = 101;
+    //没有更多了
+    public static final int NO_DATA_MORE = 102;
+
 
     public WelfareAdapter(ArrayList<FirstLevelInterfaceItem> mWelfareArrayList, Context mContext){
         this.mWelfareArrayList = mWelfareArrayList;
@@ -33,32 +43,61 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_welfare, parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.welfare_item_imageView);
-        //给imageview的高度设置动态高度,实现瀑布流,也可以用其它方法去动态的设置它的高度
-        imageView.getLayoutParams().height = (int) (new Random().nextInt(150) + 480);
+        if (viewType == Main_Item){
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_welfare, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+            ImageView imageView = (ImageView) view.findViewById(R.id.welfare_item_imageView);
+            //给imageview的高度设置动态高度,实现瀑布流,也可以用其它方法去动态的设置它的高度
+            imageView.getLayoutParams().height = (int) (new Random().nextInt(150) + 480);
+
+            return new ViewHolder(view);
+        } else if (viewType == Last_Item_state){
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_recyclerview_bottom,parent,false);
+            return new LastViewHolder(view);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-//        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-//        layoutParams.height = (int)(300 + Math.random()*400);
-//        holder.itemView.setLayoutParams(layoutParams);
-
-        if (mWelfareArrayList != null){
-            FirstLevelInterfaceItem welfareItem = mWelfareArrayList.get(position);
-            Glide.with(mContext)
-                    .load(welfareItem.getUrl())
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ViewHolder){
+            if (mWelfareArrayList != null){
+                FirstLevelInterfaceItem welfareItem = mWelfareArrayList.get(position);
+                Glide.with(mContext)
+                        .load(welfareItem.getUrl())
 //                    .placeholder(R.mipmap.error_default)
-                    .error(R.drawable.error_default)
-                    .into(holder.imageView);
-             holder.tvAuthor.setText(CommonUtil.safeText(welfareItem.getWho()));
+                        .error(R.drawable.error_default)
+                        .into(((ViewHolder)holder).imageView);
+                ((ViewHolder)holder).tvAuthor.setText(CommonUtil.safeText(welfareItem.getWho()));
+            }
+        } else if (holder instanceof TechnologyAdapter.LastViewHolder){
+            TechnologyAdapter.LastViewHolder footViewHolder = (TechnologyAdapter.LastViewHolder) holder;
+            switch (Last_Item_state){
+                case PULLUP_LOAD_MORE:
+                    footViewHolder.service_bottom_tV.setText("上拉加载更多...");
+                    footViewHolder.service_bottom_progressbar.setVisibility(View.VISIBLE);
+                    break;
+                case LOADING_MORE:
+                    footViewHolder.service_bottom_tV.setText("一大波数据在赶来...");
+                    footViewHolder.service_bottom_progressbar.setVisibility(View.VISIBLE);
+                    break;
+                case NO_DATA_MORE:
+                    footViewHolder.service_bottom_tV.setText("----end----");
+                    footViewHolder.service_bottom_progressbar.setVisibility(View.GONE);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position+1 == getItemCount()){
+            return Last_Item_state;
+        }else {
+            return Main_Item;
         }
     }
 
@@ -68,7 +107,6 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         ImageView imageView;
         TextView tvAuthor;
 
@@ -84,7 +122,26 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
         }
     }
 
+    public class LastViewHolder extends RecyclerView.ViewHolder {
+        TextView service_bottom_tV;
+        ProgressBar service_bottom_progressbar;
+        public LastViewHolder(View itemView) {
+            super(itemView);
+            service_bottom_progressbar = (ProgressBar) itemView.findViewById(R.id.recyclerView_progress_bar);
+            service_bottom_tV = (TextView) itemView.findViewById(R.id.recyclerView_footer_tv);
+        }
+    }
+
     public void setMyClickListener(OnMyClickListener myClickListener){
         this.myClickListener = myClickListener;
+    }
+
+    public void changeMoreStatus(int status) {
+        Last_Item_state= status;
+    }
+
+    public void addList(ArrayList<FirstLevelInterfaceItem> firstLevelInterfaceItemArrayList){
+        mWelfareArrayList.addAll(firstLevelInterfaceItemArrayList);
+        notifyDataSetChanged();
     }
 }

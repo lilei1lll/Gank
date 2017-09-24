@@ -28,7 +28,9 @@ public class WelfareFragment extends BaseFragment implements IWelfareView, OnMyC
 
     private RecyclerView mWelfareRecyclerView;
     private WelfareAdapter mWelfareAdapter = null;
+    private StaggeredGridLayoutManager mLayoutManager;
     private ArrayList<FirstLevelInterfaceItem> mWelfareArrayList;
+    private int page = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class WelfareFragment extends BaseFragment implements IWelfareView, OnMyC
 
         initView(welfareView);
         initRecyclerView(welfareView);
-        mWelfarePresenter.initPage();
+        mWelfarePresenter.initPage(page);
 
         return welfareView;
     }
@@ -47,9 +49,8 @@ public class WelfareFragment extends BaseFragment implements IWelfareView, OnMyC
 
     private void initRecyclerView(View v){
         mWelfareRecyclerView = (RecyclerView) v.findViewById(R.id.welfare_recyclerView);
-        StaggeredGridLayoutManager layoutManager = new
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mWelfareRecyclerView.setLayoutManager(layoutManager);
+        mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mWelfareRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     @Override
@@ -58,14 +59,34 @@ public class WelfareFragment extends BaseFragment implements IWelfareView, OnMyC
         mWelfareAdapter = new WelfareAdapter(mWelfareArrayList, getContext());
         mWelfareAdapter.setMyClickListener(this);
         mWelfareRecyclerView.setAdapter(mWelfareAdapter);
-
-        //TODO 下拉加载更多
+//        mWelfareRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            int lastVisibleItem = -1;
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (page <= C.MAX_PAGE){
+//                    if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mWelfareAdapter.getItemCount()){
+//                        page = page + 1;
+//                        mWelfareAdapter.changeMoreStatus(TechnologyAdapter.LOADING_MORE);
+//                        mWelfarePresenter.loadDataFromWeb(page);
+//                        mWelfareAdapter.changeMoreStatus(TechnologyAdapter.PULLUP_LOAD_MORE);
+//                    }
+//                }else {
+//                    mWelfareAdapter.changeMoreStatus(TechnologyAdapter.NO_DATA_MORE);
+//                }
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+////                lastVisibleItem = mLayoutManager.findLastVisibleItemPositions(i);  //.findLastVisibleItemPosition();
+//            }
+//        });
     }
 
     @Override
     public void changeDataRecyclerAdapter(ArrayList<FirstLevelInterfaceItem> items) {
-        mWelfareArrayList = items;
-        mWelfareAdapter.notifyDataSetChanged();
+        mWelfareAdapter.addList(items);
     }
 
     @Override
@@ -75,6 +96,6 @@ public class WelfareFragment extends BaseFragment implements IWelfareView, OnMyC
 
     @Override
     public void OnItemClicked(String aim, String cont) {
-        ToastUtil.show("明确告诉你，点击后的效果还没做！");
+        ToastUtil.show("点击后的效果还没做哦！");
     }
 }

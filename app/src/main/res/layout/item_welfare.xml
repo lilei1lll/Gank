@@ -31,13 +31,14 @@
                 android:gravity="bottom"
                 android:layout_marginLeft="16dp"/>
 
-            <ImageView
-                android:id="@+id/welfare_item_collection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="16dp"
-                android:src="@mipmap/image_collection_unselected"/>
+            <!--后期功能-->
+            <!--<ImageView-->
+                <!--android:id="@+id/welfare_item_collection"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:src="@mipmap/image_collection_unselected"/>-->
 
         </RelativeLayout>
 

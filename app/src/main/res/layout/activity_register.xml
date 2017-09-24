@@ -1,0 +1,77 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/toolbar_simple"/>
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_horizontal_margin">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/register_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/userName"
+                android:maxLines="1" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <EditText
+                android:id="@+id/register_password1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inputPassword"
+                android:imeActionId="@+id/register"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <EditText
+                android:id="@+id/register_password2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inputPassword"
+                android:imeActionId="@+id/register"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/register_registerButton"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/registerAndLogin"
+            android:textStyle="bold"
+            android:background="@drawable/login_botton"/>
+
+    </LinearLayout>
+</RelativeLayout>

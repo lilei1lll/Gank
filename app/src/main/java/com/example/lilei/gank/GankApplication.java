@@ -3,6 +3,7 @@ package com.example.lilei.gank;
 import android.app.Application;
 import android.content.Context;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.example.lilei.gank.base.AppBlockCanaryContext;
 import com.example.lilei.gank.component.network.RetrofitNewSingleton;
 import com.example.lilei.gank.component.util.CrashHandler;
@@ -32,6 +33,16 @@ public class GankApplication extends Application {
         CrashHandler.init(new CrashHandler(getApplicationContext()));  //crash的后台统计及处理
         BlockCanary.install(this, new AppBlockCanaryContext()).start();
         LeakCanary.install(this);
+        AVOSCloud.initialize(this, "hGgy2GjgfjMzcoUKn3epVGut-gzGzoHsz", "iYhNcyjpppFdbq2lb8PsQQJR");
+        AVOSCloud.setDebugLogEnabled(true);
+        /**
+         * 如果存在SD卡则将缓存写入SD卡,否则写入手机内存
+         */
+        if (getApplicationContext().getExternalCacheDir() != null) {
+            cacheDir = getApplicationContext().getExternalCacheDir().toString();
+        } else {
+            cacheDir = getApplicationContext().getCacheDir().toString();
+        }
     }
 
     public static Context getContext() {

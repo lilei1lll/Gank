@@ -2,13 +2,14 @@ package com.example.lilei.gank.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by lilei on 2017/9/4.
  */
 
-public class FirstLevelInterfaceItem {
+public class FirstLevelInterfaceItem implements Serializable{
 
     /**
      * _id : 599be0af421aa901c1c0a870

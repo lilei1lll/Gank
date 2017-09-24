@@ -1,6 +1,7 @@
 package com.example.lilei.gank.modoules.main;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,12 +12,14 @@ import com.example.lilei.gank.base.BaseActivity;
 import com.example.lilei.gank.modoules.android.AndroidFragment;
 import com.example.lilei.gank.modoules.frontend.FrontendFragment;
 import com.example.lilei.gank.modoules.ios.IosFragment;
+import com.example.lilei.gank.modoules.user.UserFragment;
 import com.example.lilei.gank.modoules.welfare.WelfareFragment;
 
 public class GankActivity extends BaseActivity implements View.OnClickListener{
 
     private static int SELECTED_FLAG = C.DEFAULT;
 
+    private Toolbar mMainToolbar;
     private TextView tvTitle;
     private ImageView ivAndroid;
     private TextView tvAndroid;
@@ -26,6 +29,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
     private TextView tvFrontend;
     private ImageView ivWelfare;
     private TextView tvWelfare;
+    private ImageView ivUser;
+    private TextView tvUser;
 
     // Fragment管理器
     private android.support.v4.app.FragmentManager manager;
@@ -35,6 +40,7 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
     private IosFragment mIosFragment;
     private FrontendFragment mFrontendFragment;
     private WelfareFragment mWelfareFragment;
+    private UserFragment mUserFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initView() {
-        tvTitle = (TextView)findViewById(R.id.gank_toolbar_title);
+        mMainToolbar = (Toolbar) findViewById(R.id.gank_toolbar);
+        tvTitle = (TextView)findViewById(R.id.toolbar_main_title);
         ivAndroid = (ImageView)findViewById(R.id.gank_android_imageView);
         tvAndroid = (TextView)findViewById(R.id.gank_android_TextView);
         ivIos = (ImageView)findViewById(R.id.gank_ios_ImageView);
@@ -55,6 +62,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
         tvFrontend = (TextView)findViewById(R.id.gank_frontEnd_TextView);
         ivWelfare = (ImageView)findViewById(R.id.gank_welfare_imageView);
         tvWelfare = (TextView)findViewById(R.id.gank_welfare_textView);
+        ivUser = (ImageView) findViewById(R.id.gank_user_imageView);
+        tvUser = (TextView) findViewById(R.id.gank_user_textView);
 
         ivAndroid.setOnClickListener(this);
         tvAndroid.setOnClickListener(this);
@@ -64,6 +73,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
         tvFrontend.setOnClickListener(this);
         ivWelfare.setOnClickListener(this);
         tvWelfare.setOnClickListener(this);
+        ivUser.setOnClickListener(this);
+        tvUser.setOnClickListener(this);
     }
 
     @Override
@@ -93,6 +104,12 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
             case R.id.gank_welfare_textView:
                 changeItem(C.WELFARE);
                 break;
+            case R.id.gank_user_imageView:
+                changeItem(C.USER);
+                break;
+            case R.id.gank_user_textView:
+                changeItem(C.USER);
+                break;
         }
     }
 
@@ -119,6 +136,10 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
                     ivWelfare.setImageResource(R.mipmap.welfare_unselected);
                     tvWelfare.setTextColor(getResources().getColor(R.color.unselected));
                     break;
+                case C.USER:
+                    ivUser.setImageResource(R.mipmap.user_unselected);
+                    tvUser.setTextColor(getResources().getColor(R.color.unselected));
+                    break;
             }
 
             switch (chosenItem){
@@ -128,7 +149,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
                     SELECTED_FLAG = C.ANDROID;
                     mAndroidFragment = new AndroidFragment();
                     transaction.replace(R.id.gank_fragment, mAndroidFragment);
-                    tvTitle.setText("Android 技术");
+                    mMainToolbar.setVisibility(View.VISIBLE);
+                    tvTitle.setText(R.string.androidTech);
                     break;
                 case C.IOS:
                     ivIos.setImageResource(R.mipmap.ios_selected);
@@ -136,7 +158,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
                     SELECTED_FLAG = C.IOS;
                     mIosFragment = new IosFragment();
                     transaction.replace(R.id.gank_fragment, mIosFragment);
-                    tvTitle.setText("IOS 技术");
+                    mMainToolbar.setVisibility(View.VISIBLE);
+                    tvTitle.setText(R.string.iosTech);
                     break;
                 case C.FRONTEND:
                     ivFrontend.setImageResource(R.mipmap.frontend_selected);
@@ -144,7 +167,8 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
                     SELECTED_FLAG = C.FRONTEND;
                     mFrontendFragment = new FrontendFragment();
                     transaction.replace(R.id.gank_fragment, mFrontendFragment);
-                    tvTitle.setText("前端");
+                    mMainToolbar.setVisibility(View.VISIBLE);
+                    tvTitle.setText(R.string.frontEnd);
                     break;
                 case C.WELFARE:
                     ivWelfare.setImageResource(R.mipmap.welfare_selected);
@@ -152,10 +176,19 @@ public class GankActivity extends BaseActivity implements View.OnClickListener{
                     SELECTED_FLAG = C.WELFARE;
                     mWelfareFragment = new WelfareFragment();
                     transaction.replace(R.id.gank_fragment, mWelfareFragment);
-                    tvTitle.setText("福利");
+                    mMainToolbar.setVisibility(View.VISIBLE);
+                    tvTitle.setText(R.string.welfare);
+                    break;
+                case C.USER:
+                    ivUser.setImageResource(R.mipmap.user_selectd);
+                    tvUser.setTextColor(getResources().getColor(R.color.selected));
+                    SELECTED_FLAG = C.USER;
+                    mUserFragment = new UserFragment();
+                    transaction.replace(R.id.gank_fragment, mUserFragment);
+                    mMainToolbar.setVisibility(View.GONE);
+                    tvTitle.setText(R.string.personalCenter);
                     break;
             }
-
             transaction.commit();
         }
     }

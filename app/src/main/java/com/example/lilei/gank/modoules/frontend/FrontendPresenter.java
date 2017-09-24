@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.lilei.gank.GankApplication;
 import com.example.lilei.gank.R;
-import com.example.lilei.gank.base.IBaseRecyclerModel;
+import com.example.lilei.gank.base.IBaseModel;
 import com.example.lilei.gank.base.IBaseRecyclerPresenter;
 import com.example.lilei.gank.component.util.CommonUtil;
 import com.example.lilei.gank.component.util.ToastUtil;
@@ -24,20 +24,21 @@ public class FrontendPresenter implements IBaseRecyclerPresenter {
     private ArrayList<FirstLevelInterfaceItem> mFrontendArrayList;
 
     private IFrontendView iFrontendView;
-    private IBaseRecyclerModel iFrontendModel;
+    private IBaseModel iFrontendModel;
 
     public FrontendPresenter(IFrontendView iFrontendView){
         this.iFrontendView = iFrontendView;
         iFrontendModel = new FrontendModel();
     }
 
+
     @Override
-    public void initPage() {
-        loadDataFromModel(1);
+    public void initPage(int page) {
+        loadDataFromWeb(page);
     }
 
     @Override
-    public void loadDataFromModel(int page) {
+    public void loadDataFromWeb(int page) {
         if (CommonUtil.isNetworkConnected(GankApplication.getContext()) || CommonUtil.isWifi(GankApplication.getContext())) {
             iFrontendModel.getDataFromWeb(page, new Observer<ArrayList<FirstLevelInterfaceItem>>() {
                 @Override
